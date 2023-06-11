@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  uwsgi:
+    build: ./app
+    volumes:
+      - ./app:/var/www
+    environment:
+      TZ: "Asia/Tokyo"
+    restart: always
+  nginx:
+    build: ./nginx
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - uwsgi
+    ports:
+       - "31555:80"
+    environment:
+      TZ: "Asia/Tokyo"
+    restart: always
