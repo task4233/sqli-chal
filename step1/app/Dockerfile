@@ -14,7 +14,7 @@ RUN apt-get -y install \
 RUN pip3 install -r requirements.txt
 
 RUN chmod 755 -R /var/www
-RUN adduser -u 1000 step0
-USER step0
+RUN adduser -u 1000 step1
+USER step1
 
 CMD ["uwsgi", "--ini", "/var/www/uwsgi.ini"]

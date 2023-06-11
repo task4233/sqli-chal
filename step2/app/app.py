@@ -8,7 +8,7 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
 app = Flask(__name__)
 
 cipher = "\\\x0b\x0b\x08I\x0b^TT\x15g?\x0cXk\t\x04BH>UP\x03Cf\x03kRWV\x0f\r\x0c\\\x13gC\x0b\x02\tF[\r\x02\x19\x06\r\x1b"
-db_name = "step1.db"
+db_name = "step2.db"
 
 
 class Result:

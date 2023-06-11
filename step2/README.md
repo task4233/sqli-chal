@@ -7,14 +7,14 @@
 
 ## 手順
 ### 1. Flaskアプリケーションへのアクセス
-`sqli-chall/step1`ディレクトリ内にいることを確認してください。
+`sqli-chall/step2`ディレクトリ内にいることを確認してください。
 その後、以下コマンドを実行してアプリケーションを起動してください。
 
 ```bash
 docker compose up
 ```
 
-`step1-nginx-1  | /docker-entrypoint.sh: Configuration complete; ready for start up` というログがコンソールに表示されたら、[http://127.0.0.1:31555/](http://127.0.0.1:31555/)にブラウザでアクセスしてください。
+`step2-nginx-1  | /docker-entrypoint.sh: Configuration complete; ready for start up` というログがコンソールに表示されたら、[http://127.0.0.1:31555/](http://127.0.0.1:31555/)にブラウザでアクセスしてください。
 
 その後、名前検索ができることを確認してください。
 

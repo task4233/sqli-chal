@@ -54,29 +54,29 @@ python3 ok
 
 ```bash
 git clone https://github.com/<あなたのGitHub ID>/sqli-chall
-cd sqli-chall/step0
+cd sqli-chall/step1
 ```
 
 ### 3. SQLite3の利用
-`sqli-chall/step0`ディレクトリ内にいることを確認してください。
+`sqli-chall/step1`ディレクトリ内にいることを確認してください。
 その後、SQLite3クライアントを利用してデータベースにアクセスし、キーとなる文字列が得られることを確認してください。
 
 ```bash
-sqlite3 app/step0.db
+sqlite3 app/step1.db
 sqlite> select * from secrets;
 ```
 
 SQLite3のコンソールを終了する時は `Ctrl+D` を押してください。
 
 ### 4. Flaskアプリケーションへのアクセス
-`sqli-chall/step0`ディレクトリ内にいることを確認してください。
+`sqli-chall/step1`ディレクトリ内にいることを確認してください。
 その後、以下コマンドを実行してアプリケーションを起動してください。
 
 ```bash
 docker compose up
 ```
 
-`step0-nginx-1  | /docker-entrypoint.sh: Configuration complete; ready for start up` というログがコンソールに表示されたら、[http://127.0.0.1:31555/](http://127.0.0.1:31555/)にブラウザでアクセスしてください。
+`step1-nginx-1  | /docker-entrypoint.sh: Configuration complete; ready for start up` というログがコンソールに表示されたら、[http://127.0.0.1:31555/](http://127.0.0.1:31555/)にブラウザでアクセスしてください。
 
 その後、`3. SQLite3の利用`で取得したキーとなる文字列を入力してください。
 `mini{...}`という文字列が得られましたか？
