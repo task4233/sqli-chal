@@ -5,10 +5,11 @@
 ## 手順
 ### 0. (Windowsの方のみ): WSL2の環境構築
 本演習ではWSL2の利用を強く推奨します。
-[WSL を使用して Windows に Linux をインストールする](https://learn.microsoft.com/ja-jp/windows/wsl/install)を参考に、WSL環境の構築をお願いします。
-OSはUbuntuが最もポピュラーで良いと思います。
+[WSL を使用して Windows に Linux をインストールする](https://learn.microsoft.com/ja-jp/windows/wsl/install)を参考に、WSL環境の構築をお願いします。OSはUbuntuが最もポピュラーで良いと思います。もちろん、他の仮想化ソフトウェアとしてVirtualBoxやVMwareを使っても構いません。
 
-インストール終了後に、Ubuntuにログインして`uname -r`を実行し、末尾に`WSL2`がついていることを確認してください。
+インストール終了後に、Ubuntuにログインして`uname`を実行し、`Linux`と表示されることを確認してください。
+
+目的はサポートをしやすくすることなので、自分で問題解決できる方はWindowsで課題に取り組んでも構いません。
 
 ### 1. ツールのインストール
 今後の作業で必要になるツールをインストールしてください。
