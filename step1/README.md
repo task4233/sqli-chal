@@ -17,7 +17,7 @@
 - [Git](https://git-scm.com/book/ja/v2/%E4%BD%BF%E3%81%84%E5%A7%8B%E3%82%81%E3%82%8B-Git%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB)
 - [Docker(Docker Compose)](https://www.docker.com/products/docker-desktop/)
 - SQLiteクライアント
-- Python
+- Python3系
 
 以下のコマンドを実行して、各ツールのバージョンと`git ok`、`docker ok`、`docker compose ok`、`sqlite3 ok`、`python3 ok`が全て表示されることを確認したら次の手順へ進んでください。
 
@@ -52,6 +52,7 @@ python3 ok
 
 ### 2. リポジトリのフォークとクローン
 リポジトリをフォークして、あなたのローカル環境にクローンしてください。
+Gitの用語がよく分からない方は、[MIXIさんの新卒向けGit研修のスライド](https://speakerdeck.com/mixi_engineers/2023-git-training)などを参照してください。
 
 ```bash
 git clone https://github.com/<あなたのGitHub ID>/sqli-chall
@@ -86,3 +87,5 @@ docker compose up
 
 得られたらアプリケーションを終了してください。
 `docker compose up`を実行したディレクトリで`Ctrl+C`を実行した後に、`docker compose down`を実行してください。
+
+次は[step2 - SQL Injectionを試す](../step2/)です。いよいよSQL Injectionの仕組みを、実際に手を動かしながら学びましょう！

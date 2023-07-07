@@ -32,7 +32,24 @@ docker compose up
 
 ここで、実行されているクエリについて少し説明します。
 
-例えば、`中川` と入力した時、 `SELECT * FROM users WHERE name LIKE '%中川%' AND is_admin=0` というSQL文が構築されます。
+例えば、`中川` と入力して検索する時を考えてみましょう。まずは、実装されているコードを確認します([ref](./app/app.py#L36-L40))。
+
+```python
+# SQLite3のデータベースへの接続
+c = sqlite3.connect(db_name)
+# SQLクエリの構築
+query = f"SELECT * FROM users WHERE name LIKE '%{name}%' AND is_admin=0"
+# cursorの取得(一旦スルーしても良い)
+# この辺りの説明が参考になるかも
+# ref: https://wa3.i-3-i.info/word11582.html
+cur = c.cursor()
+# 構築したSQLクエリの実行
+cur.execute(query)
+# 実行されたSQL結果の取得
+results = cur.fetchall()
+```
+
+今回は、`name`に検索文字列がインジェクト可能な仕様です。したがって、`中川`と入力して検索する場合、`SELECT * FROM users WHERE name LIKE '%中川%' AND is_admin=0` というSQL文が構築されます。次はこのSQL文について考えてみます。
 
 前から順に見ます。`SELECT * FROM users` で `users` テーブルから任意の(`*`)カラムのデータを取得するという意味になります。そして、`WHERE name LIKE '%中川%' AND is_admin=0`で、`name`カラムのデータに`中川`という文字を含み、かつ`is_admin`が`0`になる、という条件で絞り込んでいます。したがって、`users`テーブルの中にあり、`name`に`中川`という文字を含み、かつ`is_admin`が`0`である全ての全カラムのデータを取得するという意味になります。
 
@@ -48,3 +65,5 @@ docker compose up
 
 実行されているクエリを操作しても、結局は `AND is_admin=0` による制限により、当初の目的であった `is_admin=1`の情報は得られません。
 では、この `AND is_admin` を無効化できる良い方法はないでしょうか？
+
+次は[step3 - sqlmapを触る](../step3/)です。本章で見つけたSQLインジェクションを脆弱性スキャナを利用して検出してみましょう！
