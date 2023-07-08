@@ -55,7 +55,7 @@ python3 ok
 Gitの用語がよく分からない方は、[MIXIさんの新卒向けGit研修のスライド](https://speakerdeck.com/mixi_engineers/2023-git-training)などを参照してください。
 
 ```bash
-git clone https://github.com/<あなたのGitHub ID>/sqli-chall
+git clone https://github.com/<あなたのGitHub ID>/sqli-chal
 cd sqli-chall/step1
 ```
 
