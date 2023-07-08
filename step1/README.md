@@ -81,9 +81,7 @@ docker compose up
 `step1-nginx-1  | /docker-entrypoint.sh: Configuration complete; ready for start up` というログがコンソールに表示されたら、[http://127.0.0.1:31555/](http://127.0.0.1:31555/)にブラウザでアクセスしてください。
 
 その後、`3. SQLite3の利用`で取得したキーとなる文字列を入力してください。
-`mini{...}`という文字列が得られましたか？
-
-この形式の文字列をFlagと呼びます。今後のstepではこの文字列を得ることを目的とします。
+`mini{...}`という文字列が得られましたか？この形式の文字列をFlagと呼びます。
 
 得られたらアプリケーションを終了してください。
 `docker compose up`を実行したディレクトリで`Ctrl+C`を実行した後に、`docker compose down`を実行してください。
