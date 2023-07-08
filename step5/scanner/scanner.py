@@ -7,8 +7,6 @@
 from typing import List, TextIO
 import argparse
 import sys
-from requests import Request, Session
-import difflib
 
 MIN_THRESHOLD = 0.05
 MAX_THRESHOLD = 0.95
@@ -77,12 +75,7 @@ def get_response_with_payload(
         params = {payload.key: payload.value}
 
     # TODO: HTTPリクエストを送って、結果を取得する部分を書いてください
-
-    s = Session()
-    req = Request(method, target_url, params=params)
-    prep = s.prepare_request(req)
-    resp = s.send(prep)
-    return Response(resp.text)
+    return None
 
 
 def calc_similarity_between_given_two_values(val1: str, val2: str) -> float:
@@ -94,13 +87,7 @@ def calc_similarity_between_given_two_values(val1: str, val2: str) -> float:
 
     # TODO: similarityを算出する部分を書いてください
 
-    matcher = difflib.SequenceMatcher()
-    matcher.set_seq1(val1)
-    matcher.set_seq2(val2)
-    diffs = difflib.unified_diff(val1.split(), val2.split())
-    for d in diffs:
-        print(d)
-    return matcher.quick_ratio()
+    return 0.0
 
 
 def output_vulnerabilities(results: List[Vulnerability], out: TextIO = sys.stdout):
@@ -110,9 +97,7 @@ def output_vulnerabilities(results: List[Vulnerability], out: TextIO = sys.stdou
     """
 
     # TODO: 結果を出力する部分を書いてください
-    for result in results:
-        # print(result.resp, file=out)
-        pass
+    pass
 
 
 def parse_args() -> tuple[str, str]:
