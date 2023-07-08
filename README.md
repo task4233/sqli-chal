@@ -40,4 +40,4 @@
 - [ ] [step3 - sqlmapを使う](./step3)
 - [ ] [step4 - sqlmapの実装を読む](./step4)
 - [ ] [step5 - sqlmapのコードを参考に簡易的なスキャナを実装する](./step5)
-- [ ] [step6(Optional) - 自力でで簡易的なスキャナのコードを実装する](./step6)
+- [ ] step6(Optional) - 自力でで簡易的なスキャナのコードを実装する
