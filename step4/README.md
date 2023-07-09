@@ -1,6 +1,6 @@
 # step4 - sqlmapの実装を読む
 ## このステップのゴール
-- sqlmapの実装を読み、検知ロジックを理解する
+- sqlmapの実装を読み、検出ロジックを理解すること
 
 ## はじめに
 
@@ -30,8 +30,7 @@ SELECT * FROM users WHERE name LIKE '%name=-9901' OR 6151=6151-- FfuT%' AND is_a
 
 すると、`data/xml/payloads/boolean_blind.xml` というファイルに記述が見つかります([ref](https://github.com/sqlmapproject/sqlmap/blob/df388b2150fe00b045185d1f32d4d714cd567597/data/xml/payloads/boolean_blind.xml#L174C1-L188))。このファイルを利用している所を探すと、`PAYLOAD_XML_FILES` という変数を利用している `settings.py` というファイルがあることが分かります([ref](https://github.com/sqlmapproject/sqlmap/blob/df388b2150fe00b045185d1f32d4d714cd567597/lib/core/settings.py#L867))。この変数が利用されている場所は、[payloads.py](https://github.com/sqlmapproject/sqlmap/blob/df388b2150fe00b045185d1f32d4d714cd567597/lib/core/settings.py#L867)です。
 
-<details>
-<summary>探す時の順序</summary>
+これを続けていくと、以下のような順序で読み解くことができます。
 
 - [data/xml/payloads/boolean_blind.xml#L174C1-L188](https://github.com/sqlmapproject/sqlmap/blob/df388b2150fe00b045185d1f32d4d714cd567597/data/xml/payloads/boolean_blind.xml#L174C1-L188)
 - [lib/core/settings.py#L867](https://github.com/sqlmapproject/sqlmap/blob/df388b2150fe00b045185d1f32d4d714cd567597/lib/core/settings.py#L867)
@@ -48,9 +47,7 @@ SELECT * FROM users WHERE name LIKE '%name=-9901' OR 6151=6151-- FfuT%' AND is_a
   - injectした時の情報を保存
 
 
-</details>
-
-このようにして、順番に読んでいくと、以下のロジックに辿り着きます([ref](https://github.com/sqlmapproject/sqlmap/blob/df388b2150fe00b045185d1f32d4d714cd567597/lib/controller/checks.py#L526-L531))。
+最終的に、以下の検出ロジックに辿り着きます([ref](https://github.com/sqlmapproject/sqlmap/blob/df388b2150fe00b045185d1f32d4d714cd567597/lib/controller/checks.py#L526-L531))。
 
 ```python
 # Perform the test's True request
@@ -147,7 +144,7 @@ else:
     ratio = round(seqMatcher.quick_ratio() if not kb.heavilyDynamic else seqMatcher.ratio(), 3)
 ```
 
-この `seq1`には通常のページ状態が、`seq2`には引数に指定された`page`の値が指定されるため、この`comparison`ロジックはデフォルトのページ状態と渡されたページロジックの違いの指標として類似度を算出し、類似度が低い場合はinjectできたと判断するロジックになってい流ことがわかりました。
+この `seq1`には通常のページ状態が、`seq2`には引数に指定された`page`の値が指定されるため、この`comparison`ロジックはデフォルトのページ状態と渡されたページロジックの違いの指標として類似度を算出し、類似度が低い場合はinjectできたと判断するロジックになっていることがわかりました。
 
 次の[step5 - sqlmapの実装を参考に簡易的なスキャナを実装する](../step5/)では、このロジックを参考に簡易的なスキャナを(穴埋めで)実装してみましょう。
 

@@ -51,16 +51,17 @@ python3 ok
 ```
 
 ### 2. リポジトリのフォークとクローン
-リポジトリをフォークして、あなたのローカル環境にクローンしてください。
+リポジトリをフォークして、あなたのローカル環境にクローンしてください。フォークは最後にあなたの自前実装のプルリクエストを作ってもらうためのものなので、フォークはstep5に到達してからでも構いません。
+
 Gitの用語がよく分からない方は、[MIXIさんの新卒向けGit研修のスライド](https://speakerdeck.com/mixi_engineers/2023-git-training)などを参照してください。
 
 ```bash
 git clone https://github.com/<あなたのGitHub ID>/sqli-chal
-cd sqli-chall/step1
+cd sqli-chal/step1
 ```
 
 ### 3. SQLite3の利用
-`sqli-chall/step1`ディレクトリ内にいることを確認してください。
+`sqli-chal/step1`ディレクトリ内にいることを確認してください。
 その後、SQLite3クライアントを利用してデータベースにアクセスし、キーとなる文字列が得られることを確認してください。
 
 ```bash
@@ -71,7 +72,7 @@ sqlite> select * from secrets;
 SQLite3のコンソールを終了する時は `Ctrl+D` を押してください。
 
 ### 4. Flaskアプリケーションへのアクセス
-`sqli-chall/step1`ディレクトリ内にいることを確認してください。
+`sqli-chal/step1`ディレクトリ内にいることを確認してください。
 その後、以下コマンドを実行してアプリケーションを起動してください。
 
 ```bash

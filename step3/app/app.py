@@ -8,7 +8,9 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
 app = Flask(__name__)
 
 cipher = "\x06\x0c\x17\x02\x1e\n\x1a\t\x14@Q~\x02\x16&\x0e\x04\n\x12:\rN~T\x18\x00&\t\x10\r4\x0c\r~HR4\x01\x18\x05\x02\x1c\x19\n\x0cR\x00\x00J\x18"
-db_name = "step3.db"
+
+# TODO: ここをstep2.db にして再度sqlmapを実行すると...?
+db_name = "step2.db"
 
 
 class Result:
