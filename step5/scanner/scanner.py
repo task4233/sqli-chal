@@ -57,8 +57,7 @@ def construct_payloads(key_name: str) -> List[Payload]:
         return []
 
     payload_list = [
-        "' OR 1=1 -- "
-        # TODO: step5: ここに構築したペイロードを追加してください
+        # TODO-1: ここに構築したペイロードを追加してください
     ]
     return [Payload(key_name, payload) for payload in payload_list]
 
@@ -76,12 +75,8 @@ def get_response_with_payload(
     if payload is not None:
         params = {payload.key: payload.value}
 
-    # TODO: HTTPリクエストを送って、結果を取得する部分を書いてください
-    resp = requests.get(target_url, params=params)
-    return resp
-
-
-import difflib
+    # TODO-2: HTTPリクエストを送って、結果を取得する部分を書いてください
+    return Response()
 
 
 def calc_similarity_between_given_two_values(val1: str, val2: str) -> float:
@@ -91,16 +86,8 @@ def calc_similarity_between_given_two_values(val1: str, val2: str) -> float:
     calc_similarity_between_given_two_values は渡された2つの値の類似度を返却します。
     """
 
-    # TODO: similarityを算出する部分を書いてください
-    # difflib
-    matcher = difflib.SequenceMatcher()
-    matcher.set_seq1(val1)
-    matcher.set_seq2(val2)
-    diffs = difflib.unified_diff(val1.split(), val2.split())
-    for d in diffs:
-        print(d)
-
-    return matcher.quick_ratio()
+    # TODO-3: similarityを算出する部分を書いてください
+    return 0.0
 
 
 def output_vulnerabilities(results: List[Vulnerability], out: TextIO = sys.stdout):
@@ -109,9 +96,8 @@ def output_vulnerabilities(results: List[Vulnerability], out: TextIO = sys.stdou
     out parameter is optional value, if not given, out is set as sys.stdout.
     """
 
-    # TODO: 結果を出力する部分を書いてください
-    # for result in results:
-    #     print(result.resp, file=out)
+    # TODO-4: 結果を出力する部分を書いてください
+    pass
 
 
 def parse_args() -> tuple[str, str]:
@@ -124,13 +110,21 @@ def parse_args() -> tuple[str, str]:
 
 
 def main():
+    # 2. コマンドライン引数をパースします。
+    # 例えば、python3 scanner.py -u http://localhost:31555 -p nameで実行されたとき、
+    # target_urlにはhttp://localhost:31555が、key_nameにはnameが格納されます。
     target_url, key_name = parse_args()
     vulnerabilities = []
 
+    # 3. 正常系のHTTPレスポンスを保持します。
     normal_response = get_response_with_payload(target_url)
 
+    # 4. SQL Injectionを引き起こすためのペイロードをpayloadsに格納します。
     payloads = construct_payloads(key_name)
+
+    # 5. forループでそれぞれのペイロードを検証します。
     for payload in payloads:
+        # 5-1. SQL Injectionを引き起こすためのペイロードを用いた場合のHTTPレスポンスを受け取ります。
         response = get_response_with_payload(
             target_url=target_url,
             payload=payload,
@@ -138,14 +132,20 @@ def main():
         if response is None:
             continue
 
+        # 5-2. 正常系のHTTPレスポンスとSQL Injectionを引き起こすためのペイロードを用いた場合のHTTPレスポンス
+        # との類似度を算出します。
         similarity = calc_similarity_between_given_two_values(
             normal_response.text, response.text
         )
+        # 5-3. もし、類似度がMIN_THRESHOLD <= 類似度 < MAX_THRESHOLDの範囲に含まれていない場合に、
+        # 脆弱性のあるレスポンスとして検出します。
         if not (MIN_THRESHOLD <= similarity and similarity < MAX_THRESHOLD):
             vulnerabilities.append(Vulnerability(response.text))
 
+    # 6. 発見された結果を出力します。
     output_vulnerabilities(vulnerabilities)
 
 
 if __name__ == "__main__":
+    # 1. main関数が実行されます。
     main()
